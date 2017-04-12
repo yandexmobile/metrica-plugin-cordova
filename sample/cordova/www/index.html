@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+   index.html
+
+  This file is a part of the AppMetrica.
+
+  Version for Cordova/PhoneGap © 2017 YANDEX
+
+  You may not use this file except in compliance with the License.
+  You may obtain a copy of the License at https://yandex.com/legal/metrica_termsofuse/
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>AppMetrica Cordova Plugin Sample</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>AppMetrica Cordova Plugin <br /> Sample</h1>
+            <div class="app-line">
+                <button id="reportEventBtn">Log click</button>
+            </div>
+            <div class="app-line">
+                <button id="reportEventWithParametersBtn">Log click(with parameters)</button>
+            </div>
+            <div class="app-line">
+                <button id="reportErrorBtn">Log error</button>
+            </div>
+            <div class="app-line">
+                Location:
+                <button id="setMinskBtn">Minsk</button>
+                <button id="setMoscowBtn">Moscow</button>
+            </div>
+            <div class="app-line">
+                <label for="appVersionInput">App version:</label>
+                <input type="text" id="appVersionInput" value="1.0.0" />
+                <button id="setAppVersionBtn">Set</button>
+            </div>
+            <div class="app-line">
+                <label for="sessionTimeoutInput">Session timeout(s):</label>
+                <input type="number" id="sessionTimeoutInput" value="10" />
+                <button id="setSessionTimeoutBtn">Set</button>
+            </div>
+            <div class="app-line">
+                <button id="setLoggingEnabledBtn">Enable logging</button>
+            </div>
+            <div class="app-line">
+                <label for="reportCrashesInput">Report crashes:</label>
+                <input type="checkbox" id="reportCrashesInput" checked />
+            </div>
+            <div class="app-line">
+                <label for="trackLocationInput">Track location:</label>
+                <input type="checkbox" id="trackLocationInput" checked />
+            </div>
+            <div class="app-line">
+                <label for="collectInstalledAppsInput">Collect installed apps:</label>
+                <input type="checkbox" id="collectInstalledAppsInput" />
+            </div>
+            <div class="app-line">
+                <button id="requestLocation">Request Location</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>

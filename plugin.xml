@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="yandex-appmetrica-plugin-cordova"
+        version="0.1.0">
+    <name>AppMetrica</name>
+    <description>Cordova/PhoneGap plugin for AppMetrica analytics tool</description>
+    <author>Yandex, LLC</author>
+    <license>https://yandex.com/legal/metrica_termsofuse/</license>
+    <keywords>yandex appmetrica metrica analytics tracking ios android</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=3.3.0"/>
+    </engines>
+
+    <js-module src="www/appmetrica.js" name="appmetrica">
+        <clobbers target="appMetrica" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AppMetrica" >
+                <param name="android-package" value="com.yandex.metrica.plugin.cordova.AppMetricaPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service
+                    android:name="com.yandex.metrica.MetricaService"
+                    android:enabled="true"
+                    android:exported="true"
+                    android:process=":Metrica">
+
+                <intent-filter>
+                    <category android:name="android.intent.category.DEFAULT"/>
+                    <action android:name="com.yandex.metrica.IMetricaService"/>
+                    <data android:scheme="metrica"/>
+                </intent-filter>
+
+                <meta-data android:name="metrica:api:level" android:value="52"/>
+            </service>
+            <receiver
+                    android:name="com.yandex.metrica.MetricaEventHandler"
+                    android:enabled="true"
+                    android:exported="true">
+
+                <intent-filter>
+                    <action android:name="com.android.vending.INSTALL_REFERRER"/>
+                </intent-filter>
+            </receiver>
+        </config-file>
+
+        <source-file src="platforms/android/com/yandex/metrica/plugin/cordova/AppMetricaPlugin.java"
+                     target-dir="src/com/yandex/metrica/plugin/cordova" />
+
+        <source-file src="platforms/android/mobmetricalib-2.62.jar" target-dir="libs/"/>
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AppMetrica">
+                <param name="ios-package" value="YMMAppMetricaPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="platforms/ios/YMMAppMetricaPlugin.h" />
+        <source-file src="platforms/ios/YMMAppMetricaPlugin.m" />
+        <framework src="platforms/ios/YandexMobileMetrica.framework" custom="true" />
+
+        <framework src="AdSupport.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="Security.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="UIKit.framework" />
+
+        <framework src="SafariServices.framework" weak="true" />
+
+        <framework src="libc++.dylib" />
+        <framework src="libsqlite3.dylib" />
+        <framework src="libz.dylib" />
+    </platform>
+
+</plugin>

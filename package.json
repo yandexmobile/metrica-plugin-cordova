@@ -1,0 +1,45 @@
+{
+  "name": "yandex-appmetrica-plugin-cordova",
+  "version": "0.1.0",
+  "description": "Cordova/PhoneGap plugin for AppMetrica analytics tool",
+  "cordova": {
+    "id": "yandex-appmetrica-plugin-cordova",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yandexmobile/metrica-plugin-cordova.git"
+  },
+  "keywords": [
+    "yandex",
+    "appmetrica",
+    "metrica",
+    "analytics",
+    "tracking",
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "author": "Yandex, LLC",
+  "license": "ISC",
+  "homepage": "https://tech.yandex.ru/metrica-mobile-sdk",
+  "bugs": {
+    "url": "https://github.com/yandex-mobile/metrica-plugin-cordova/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.3.0"
+    }
+  ]
+}

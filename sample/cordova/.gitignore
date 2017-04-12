@@ -1,0 +1,7 @@
+bin/*
+plugins/*
+platforms/*
+!/plugins
+!/plugins/android.json
+!/plugins/fetch.json
+!/plugins/ios.json

@@ -1,18 +1,17 @@
 /*
- *  YMMAppMetricaPlugin.m
- *
- * This file is a part of the AppMetrica.
- *
- * Version for iOS © 2017 YANDEX
- *
+ * Version for Cordova/PhoneGap
+ * © 2017 YANDEX
  * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at https://yandex.com/legal/metrica_termsofuse/
+ * You may obtain a copy of the License at
+ * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
 #import "YMMAppMetricaPlugin.h"
 
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
 #import <CoreLocation/CoreLocation.h>
+
+static bool gYMMIsAppMetricaActivated = false;
 
 @implementation YMMAppMetricaPlugin
 
@@ -35,8 +34,7 @@
     NSDictionary *configurationDictionary = [command argumentAtIndex:0 withDefault:nil andClass:[NSDictionary class]];
 
     [self dispatchAsync:^{
-        YMMYandexMetricaConfiguration *configuration = [self configurationForDictionary:configurationDictionary];
-        [YMMYandexMetrica activateWithConfiguration:configuration];
+        [[self class] activateWithConfigurationDictionary:configurationDictionary];
     }];
 }
 
@@ -79,7 +77,7 @@
     NSDictionary *locationDictionary = [command argumentAtIndex:0 withDefault:nil andClass:[NSDictionary class]];
 
     [self dispatchAsync:^{
-        CLLocation *location = [self locationForDictionary:locationDictionary];
+        CLLocation *location = [[self class] locationForDictionary:locationDictionary];
         [YMMYandexMetrica setLocation:location];
     }];
 }
@@ -150,7 +148,7 @@
     };
 }
 
-- (YMMYandexMetricaConfiguration *)configurationForDictionary:(NSDictionary *)configurationDictionary
++ (YMMYandexMetricaConfiguration *)configurationForDictionary:(NSDictionary *)configurationDictionary
 {
     NSString *apiKey = configurationDictionary[@"apiKey"];
     YMMYandexMetricaConfiguration *configuration = [[YMMYandexMetricaConfiguration alloc] initWithApiKey:apiKey];
@@ -199,7 +197,7 @@
     return configuration;
 }
 
-- (CLLocation *)locationForDictionary:(NSDictionary *)locationDictionary
++ (CLLocation *)locationForDictionary:(NSDictionary *)locationDictionary
 {
     if (locationDictionary == nil) {
         return nil;
@@ -229,6 +227,18 @@
 - (void)dispatchAsync:(dispatch_block_t)block
 {
     [self.commandDelegate runInBackground:block];
+}
+
++ (void)activateWithConfigurationDictionary:(NSDictionary *)configuration
+{
+    YMMYandexMetricaConfiguration *config = [[self class] configurationForDictionary:configuration];
+    [YMMYandexMetrica activateWithConfiguration:config];
+    gYMMIsAppMetricaActivated = true;
+}
+
++ (bool)isAppMetricaActivated
+{
+    return gYMMIsAppMetricaActivated;
 }
 
 @end

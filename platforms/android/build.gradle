@@ -1,0 +1,11 @@
+repositories{    
+  jcenter()
+  mavenCentral()
+  flatDir {
+      dirs 'libs'
+   }
+}
+
+dependencies {
+	compile(name:'mobmetricalib-2.78', ext:'aar')
+}

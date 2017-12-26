@@ -1,12 +1,9 @@
 /*
- *  AppMetricaPlugin.java
- *
- * This file is a part of the AppMetrica.
- *
- * Version for Android © 2017 YANDEX
- *
+ * Version for Cordova/PhoneGap
+ * © 2017 YANDEX
  * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at https://yandex.com/legal/metrica_termsofuse/
+ * You may obtain a copy of the License at
+ * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
 package com.yandex.metrica.plugin.cordova;
@@ -78,17 +75,17 @@ public class AppMetricaPlugin extends CordovaPlugin {
     }
 
     @Override
-    public void onPause(boolean multitasking) {
+    public void onPause(final boolean multitasking) {
         onPauseActivity();
     }
 
     @Override
-    public void onResume(boolean multitasking) {
+    public void onResume(final boolean multitasking) {
         onResumeActivity();
     }
 
     @Override
-    public void onNewIntent(Intent intent) {
+    public void onNewIntent(final Intent intent) {
         getAppMetricaExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -125,8 +122,8 @@ public class AppMetricaPlugin extends CordovaPlugin {
         }
     }
 
-    private Location toLocation(JSONObject locationObj) throws JSONException {
-        Location location = new Location("Custom");
+    public static Location toLocation(final JSONObject locationObj) throws JSONException {
+        final Location location = new Location("Custom");
 
         if (locationObj.has("latitude")) {
             location.setLatitude(locationObj.getDouble("latitude"));
@@ -153,9 +150,9 @@ public class AppMetricaPlugin extends CordovaPlugin {
         return location;
     }
 
-    private YandexMetricaConfig toConfig(JSONObject configObj) throws JSONException {
-        String apiKey = configObj.getString("apiKey");
-        YandexMetricaConfig.Builder builder = YandexMetricaConfig.newConfigBuilder(apiKey);
+    public static YandexMetricaConfig toConfig(final JSONObject configObj) throws JSONException {
+        final String apiKey = configObj.getString("apiKey");
+        final YandexMetricaConfig.Builder builder = YandexMetricaConfig.newConfigBuilder(apiKey);
 
         if (configObj.has("handleFirstActivationAsUpdateEnabled")) {
             builder.handleFirstActivationAsUpdate(configObj.getBoolean("handleFirstActivationAsUpdateEnabled"));
@@ -176,17 +173,17 @@ public class AppMetricaPlugin extends CordovaPlugin {
             builder.setLogEnabled();
         }
         if (configObj.has("location")) {
-            Location location = toLocation(configObj.getJSONObject("location"));
+            final Location location = toLocation(configObj.getJSONObject("location"));
             builder.setLocation(location);
         }
         if (configObj.has("preloadInfo")) {
-            JSONObject preloadInfoObj = configObj.getJSONObject("preloadInfo");
-            PreloadInfo.Builder infoBuilder = PreloadInfo.newBuilder(preloadInfoObj.getString("trackingId"));
-            JSONObject additionalInfoObj = preloadInfoObj.optJSONObject("additionalInfo");
+            final JSONObject preloadInfoObj = configObj.getJSONObject("preloadInfo");
+            final PreloadInfo.Builder infoBuilder = PreloadInfo.newBuilder(preloadInfoObj.getString("trackingId"));
+            final JSONObject additionalInfoObj = preloadInfoObj.optJSONObject("additionalInfo");
             if (additionalInfoObj != null) {
                 for (Iterator<String> keyIterator = additionalInfoObj.keys(); keyIterator.hasNext();) {
-                    String key = keyIterator.next();
-                    String value = additionalInfoObj.getString(key);
+                    final String key = keyIterator.next();
+                    final String value = additionalInfoObj.getString(key);
                     infoBuilder.setAdditionalParams(key, value);
                 }
             }
@@ -196,29 +193,31 @@ public class AppMetricaPlugin extends CordovaPlugin {
         return builder.build();
     }
 
-    private void activate(JSONArray args, final CallbackContext callbackContext) throws JSONException {
+    private void activate(final JSONArray args,
+                          final CallbackContext callbackContext) throws JSONException {
         final JSONObject configObj = args.getJSONObject(0);
         final YandexMetricaConfig config = toConfig(configObj);
 
-        Context context = getActivity().getApplicationContext();
+        final Context context = getActivity().getApplicationContext();
         YandexMetrica.activate(context, config);
 
         synchronized (mLock) {
             if (mAppMetricaActivated == false) {
                 YandexMetrica.reportAppOpen(getActivity());
                 if (mActivityPaused == false) {
-                    onResumeActivity();
+                    YandexMetrica.onResumeActivity(getActivity());
                 }
             }
             mAppMetricaActivated = true;
         }
     }
 
-    private void reportEvent(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void reportEvent(final JSONArray args,
+                             final CallbackContext callbackContext) throws JSONException {
         final String eventName = args.getString(0);
         String eventParametersJSONString = null;
         try {
-            JSONObject eventParametersObj = args.getJSONObject(1);
+            final JSONObject eventParametersObj = args.getJSONObject(1);
             eventParametersJSONString = eventParametersObj.toString();
         } catch (JSONException ignored) {}
 
@@ -229,60 +228,69 @@ public class AppMetricaPlugin extends CordovaPlugin {
         }
     }
 
-    private void reportError(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void reportError(final JSONArray args,
+                             final CallbackContext callbackContext) throws JSONException {
         final String errorName = args.getString(0);
         Throwable errorThrowable = null;
         try {
-            String errorReason = args.getString(1);
+            final String errorReason = args.getString(1);
             errorThrowable = new Throwable(errorReason);
         } catch (JSONException ignored) {}
 
         YandexMetrica.reportError(errorName, errorThrowable);
     }
 
-    private void setCustomAppVersion(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setCustomAppVersion(final JSONArray args,
+                                     final CallbackContext callbackContext) throws JSONException {
         final String appVersion = args.getString(0);
 
         YandexMetrica.setCustomAppVersion(appVersion);
     }
 
-    private void setLocation(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setLocation(final JSONArray args,
+                             final CallbackContext callbackContext) throws JSONException {
         final JSONObject locationObj = args.getJSONObject(0);
 
-        Location location = toLocation(locationObj);
+        final Location location = toLocation(locationObj);
         YandexMetrica.setLocation(location);
     }
 
-    private void setTrackLocationEnabled(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setTrackLocationEnabled(final JSONArray args,
+                                         final CallbackContext callbackContext) throws JSONException {
         final boolean enabled = args.getBoolean(0);
 
         YandexMetrica.setTrackLocationEnabled(enabled);
     }
 
-    private void setEnvironmentValue(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setEnvironmentValue(final JSONArray args,
+                                     final CallbackContext callbackContext) throws JSONException {
         final String key = args.getString(0);
         final String value = args.getString(1);
 
         YandexMetrica.setEnvironmentValue(key, value);
     }
 
-    private void setSessionTimeout(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setSessionTimeout(final JSONArray args,
+                                   final CallbackContext callbackContext) throws JSONException {
         final int sessionTimeout = args.getInt(0);
 
         YandexMetrica.setSessionTimeout(sessionTimeout);
     }
 
-    private void setReportCrashesEnabled(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setReportCrashesEnabled(final JSONArray args,
+                                         final CallbackContext callbackContext) throws JSONException {
         final boolean enabled = args.getBoolean(0);
 
         YandexMetrica.setReportCrashesEnabled(enabled);
     }
 
-    private void setLoggingEnabled(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setLoggingEnabled(final JSONArray args,
+                                   final CallbackContext callbackContext) throws JSONException {
         YandexMetrica.setLogEnabled();
     }
 
-    private void setCollectInstalledAppsEnabled(JSONArray args, CallbackContext callbackContext) throws JSONException {
+    private void setCollectInstalledAppsEnabled(final JSONArray args,
+                                                final CallbackContext callbackContext) throws JSONException {
         final boolean enabled = args.getBoolean(0);
 
         YandexMetrica.setCollectInstalledApps(enabled);

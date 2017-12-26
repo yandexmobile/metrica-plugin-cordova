@@ -1,12 +1,9 @@
 /*
- *  YMMAppMetricaPlugin.h
- *
- * This file is a part of the AppMetrica.
- *
- * Version for iOS © 2017 YANDEX
- *
+ * Version for Cordova/PhoneGap
+ * © 2017 YANDEX
  * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at https://yandex.com/legal/metrica_termsofuse/
+ * You may obtain a copy of the License at
+ * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
 #import <Cordova/CDVPlugin.h>
@@ -24,5 +21,7 @@
 - (void)setReportCrashesEnabled:(CDVInvokedUrlCommand *)command;
 - (void)setLoggingEnabled:(CDVInvokedUrlCommand *)command;
 - (void)setCollectInstalledAppsEnabled:(CDVInvokedUrlCommand *)command;
++ (void)activateWithConfigurationDictionary:(NSDictionary *)configuration;
++ (bool)isAppMetricaActivated;
 
 @end

@@ -2,11 +2,11 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="yandex-appmetrica-plugin-cordova"
-        version="0.1.0">
+        version="0.2.0">
     <name>AppMetrica</name>
     <description>Cordova/PhoneGap plugin for AppMetrica analytics tool</description>
     <author>Yandex, LLC</author>
-    <license>https://yandex.com/legal/metrica_termsofuse/</license>
+    <license>https://yandex.com/legal/appmetrica_sdk_agreement/</license>
     <keywords>yandex appmetrica metrica analytics tracking ios android</keywords>
 
     <engines>
@@ -25,41 +25,12 @@
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest">
-            <uses-permission android:name="android.permission.INTERNET"/>
-            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-        </config-file>
-
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <service
-                    android:name="com.yandex.metrica.MetricaService"
-                    android:enabled="true"
-                    android:exported="true"
-                    android:process=":Metrica">
-
-                <intent-filter>
-                    <category android:name="android.intent.category.DEFAULT"/>
-                    <action android:name="com.yandex.metrica.IMetricaService"/>
-                    <data android:scheme="metrica"/>
-                </intent-filter>
-
-                <meta-data android:name="metrica:api:level" android:value="52"/>
-            </service>
-            <receiver
-                    android:name="com.yandex.metrica.MetricaEventHandler"
-                    android:enabled="true"
-                    android:exported="true">
-
-                <intent-filter>
-                    <action android:name="com.android.vending.INSTALL_REFERRER"/>
-                </intent-filter>
-            </receiver>
-        </config-file>
-
         <source-file src="platforms/android/com/yandex/metrica/plugin/cordova/AppMetricaPlugin.java"
                      target-dir="src/com/yandex/metrica/plugin/cordova" />
 
-        <source-file src="platforms/android/mobmetricalib-2.62.jar" target-dir="libs/"/>
+        <source-file src="platforms/android/mobmetricalib-2.78.aar" target-dir="libs/"/>
+
+        <framework src="platforms/android/build.gradle" custom="true" type="gradleReference" />
     </platform>
 
     <platform name="ios">

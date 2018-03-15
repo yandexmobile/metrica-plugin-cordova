@@ -28,7 +28,7 @@
         <source-file src="platforms/android/com/yandex/metrica/plugin/cordova/AppMetricaPlugin.java"
                      target-dir="src/com/yandex/metrica/plugin/cordova" />
 
-        <source-file src="platforms/android/mobmetricalib-2.78.aar" target-dir="libs/"/>
+        <source-file src="platforms/android/mobmetricalib-2.78.aar" target-dir="thirdparty-libs/"/>
 
         <framework src="platforms/android/build.gradle" custom="true" type="gradleReference" />
     </platform>

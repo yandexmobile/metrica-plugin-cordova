@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="yandex-appmetrica-plugin-cordova"
-        version="0.2.0">
+        version="0.3.0">
     <name>AppMetrica</name>
     <description>Cordova/PhoneGap plugin for AppMetrica analytics tool</description>
     <author>Yandex, LLC</author>
@@ -27,8 +27,6 @@
 
         <source-file src="platforms/android/com/yandex/metrica/plugin/cordova/AppMetricaPlugin.java"
                      target-dir="src/com/yandex/metrica/plugin/cordova" />
-
-        <source-file src="platforms/android/mobmetricalib-2.78.aar" target-dir="libs/"/>
 
         <framework src="platforms/android/build.gradle" custom="true" type="gradleReference" />
     </platform>

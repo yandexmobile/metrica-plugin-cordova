@@ -27,6 +27,9 @@ advertisement**.
 
 ## Changelog
 
+### Version 0.3.0
+* Support cordova-android@7.0.0
+
 ### Version 0.2.0
 * Updated versions of the AppMetrica SDK (iOS 2.9.4 and Android 2.78)
 * Added a method for getting the configuration of the AppMetrica Push Cordova plugin.

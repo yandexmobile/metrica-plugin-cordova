@@ -27,6 +27,10 @@ advertisement**.
 
 ## Changelog
 
+### Version 0.4.0
+* Updated iOS version of the AppMetrica SDK (iOS 2.9.8).
+* Changed the SDK to meet the requirements of the Apple App Store Review Team. Update the AppMetrica SDK to avoid any issues during the App Store moderation process.
+
 ### Version 0.3.0
 * Support cordova-android@7.0.0
 

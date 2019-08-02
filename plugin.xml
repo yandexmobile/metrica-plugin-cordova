@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Version for Cordova/PhoneGap
+  ~ © 2017-2019 YANDEX
+  ~ You may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~ https://yandex.com/legal/appmetrica_sdk_agreement/
+  -->
+
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="yandex-appmetrica-plugin-cordova"
-        version="0.4.0">
+        version="1.0.0">
     <name>AppMetrica</name>
     <description>Cordova/PhoneGap plugin for AppMetrica analytics tool</description>
     <author>Yandex, LLC</author>
@@ -42,6 +50,7 @@
         <header-file src="platforms/ios/YMMAppMetricaPlugin.h" />
         <source-file src="platforms/ios/YMMAppMetricaPlugin.m" />
         <framework src="platforms/ios/YandexMobileMetrica.framework" custom="true" />
+        <framework src="platforms/ios/YandexMobileMetricaCrashes.framework" custom="true" />
 
         <framework src="AdSupport.framework" />
         <framework src="CoreGraphics.framework" />

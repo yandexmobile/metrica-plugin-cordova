@@ -1,6 +1,6 @@
 /*
  * Version for Cordova/PhoneGap
- * © 2017 YANDEX
+ * © 2017-2019 YANDEX
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * https://yandex.com/legal/appmetrica_sdk_agreement/
@@ -27,7 +27,7 @@ static bool gYMMIsAppMetricaActivated = false;
     }
 }
 
-#pragma mard - Commands
+#pragma mark - Commands
 
 - (void)activate:(CDVInvokedUrlCommand *)command
 {
@@ -63,15 +63,6 @@ static bool gYMMIsAppMetricaActivated = false;
     }];
 }
 
-- (void)setCustomAppVersion:(CDVInvokedUrlCommand *)command
-{
-    NSString *appVersion = [command argumentAtIndex:0 withDefault:nil andClass:[NSString class]];
-
-    [self dispatchAsync:^{
-        [YMMYandexMetrica setCustomAppVersion:appVersion];
-    }];
-}
-
 - (void)setLocation:(CDVInvokedUrlCommand *)command
 {
     NSDictionary *locationDictionary = [command argumentAtIndex:0 withDefault:nil andClass:[NSDictionary class]];
@@ -82,59 +73,15 @@ static bool gYMMIsAppMetricaActivated = false;
     }];
 }
 
-- (void)setTrackLocationEnabled:(CDVInvokedUrlCommand *)command
+- (void)setLocationTracking:(CDVInvokedUrlCommand *)command
 {
     NSNumber *enabledValue = [command argumentAtIndex:0 withDefault:nil andClass:[NSNumber class]];
 
     if (enabledValue != nil) {
         [self dispatchAsync:^{
-            [YMMYandexMetrica setTrackLocationEnabled:enabledValue.boolValue];
+            [YMMYandexMetrica setLocationTracking:enabledValue.boolValue];
         }];
     }
-}
-
-- (void)setEnvironmentValue:(CDVInvokedUrlCommand *)command
-{
-    NSString *key = [command argumentAtIndex:0 withDefault:nil andClass:[NSString class]];
-    NSString *value = [command argumentAtIndex:1 withDefault:nil andClass:[NSString class]];
-
-    [self dispatchAsync:^{
-        [YMMYandexMetrica setEnvironmentValue:value forKey:key];
-    }];
-}
-
-- (void)setSessionTimeout:(CDVInvokedUrlCommand *)command
-{
-    NSNumber *sessionTimeoutValue = [command argumentAtIndex:0 withDefault:nil andClass:[NSNumber class]];
-
-    if (sessionTimeoutValue != nil) {
-        [self dispatchAsync:^{
-            [YMMYandexMetrica setSessionTimeout:sessionTimeoutValue.unsignedIntegerValue];
-        }];
-    }
-}
-
-- (void)setReportCrashesEnabled:(CDVInvokedUrlCommand *)command
-{
-    NSNumber *enabledValue = [command argumentAtIndex:0 withDefault:nil andClass:[NSNumber class]];
-
-    if (enabledValue != nil) {
-        [self dispatchAsync:^{
-            [YMMYandexMetrica setReportCrashesEnabled:enabledValue.boolValue];
-        }];
-    }
-}
-
-- (void)setLoggingEnabled:(CDVInvokedUrlCommand *)command
-{
-    [self dispatchAsync:^{
-        [YMMYandexMetrica setLoggingEnabled:YES];
-    }];
-}
-
-- (void)setCollectInstalledAppsEnabled:(CDVInvokedUrlCommand *)command
-{
-    // Do nothing. Not available for iOS platform.
 }
 
 #pragma mark - Utils
@@ -153,41 +100,41 @@ static bool gYMMIsAppMetricaActivated = false;
     NSString *apiKey = configurationDictionary[@"apiKey"];
     YMMYandexMetricaConfiguration *configuration = [[YMMYandexMetricaConfiguration alloc] initWithApiKey:apiKey];
 
-    NSNumber *handleFirstActivationAsUpdateEnabled = configurationDictionary[@"handleFirstActivationAsUpdateEnabled"];
-    NSNumber *trackLocationEnabled = configurationDictionary[@"trackLocationEnabled"];
+    NSNumber *handleFirstActivationAsUpdate = configurationDictionary[@"handleFirstActivationAsUpdate"];
+    NSNumber *locationTracking = configurationDictionary[@"locationTracking"];
     NSNumber *sessionTimeout = configurationDictionary[@"sessionTimeout"];
-    NSNumber *reportCrashesEnabled = configurationDictionary[@"reportCrashesEnabled"];
-    NSString *customAppVersion = configurationDictionary[@"appVersion"];
-    NSNumber *loggingEnabled = configurationDictionary[@"loggingEnabled"];
+    NSNumber *crashReporting = configurationDictionary[@"crashReporting"];
+    NSString *appVersion = configurationDictionary[@"appVersion"];
+    NSNumber *logs = configurationDictionary[@"logs"];
     NSDictionary *customLocationDictionary = configurationDictionary[@"location"];
     NSDictionary *preloadInfoDictionary = configurationDictionary[@"preloadInfo"];
 
-    if (handleFirstActivationAsUpdateEnabled != nil) {
-        configuration.handleFirstActivationAsUpdateEnabled = [handleFirstActivationAsUpdateEnabled boolValue];
+    if (handleFirstActivationAsUpdate != nil) {
+        configuration.handleFirstActivationAsUpdate = [handleFirstActivationAsUpdate boolValue];
     }
-    if (trackLocationEnabled != nil) {
-        configuration.trackLocationEnabled = [trackLocationEnabled boolValue];
+    if (locationTracking != nil) {
+        configuration.locationTracking = [locationTracking boolValue];
     }
     if (sessionTimeout != nil) {
         configuration.sessionTimeout = [sessionTimeout unsignedIntegerValue];
     }
-    if (reportCrashesEnabled != nil) {
-        configuration.reportCrashesEnabled = [reportCrashesEnabled boolValue];
+    if (crashReporting != nil) {
+        configuration.crashReporting = [crashReporting boolValue];
     }
-    if (customAppVersion != nil) {
-        configuration.customAppVersion = customAppVersion;
+    if (appVersion != nil) {
+        configuration.appVersion = appVersion;
     }
-    if (loggingEnabled != nil) {
-        configuration.loggingEnabled = [loggingEnabled boolValue];
+    if (logs != nil) {
+        configuration.logs = [logs boolValue];
     }
     if (customLocationDictionary != nil) {
-        configuration.location = [self locationForDictionary:customLocationDictionary];;
+        configuration.location = [self locationForDictionary:customLocationDictionary];
     }
     if (preloadInfoDictionary != nil) {
         NSString *trackingID = preloadInfoDictionary[@"trackingId"];
         YMMYandexMetricaPreloadInfo *preloadInfo =
             [[YMMYandexMetricaPreloadInfo alloc] initWithTrackingIdentifier:trackingID];
-        NSDictionary *additionalInfo = preloadInfoDictionary[@"additionalInfo"];
+        NSDictionary *additionalInfo = preloadInfoDictionary[@"additionalParams"];
         for (NSString *key in additionalInfo) {
             [preloadInfo setAdditionalInfo:additionalInfo[key] forKey:key];
         }

@@ -1,25 +1,21 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.yandex.mobile.appmetrica.plugin.cordova.sample"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.yandex.mobile.appmetrica.plugin.cordova.sample"
     },
-    "installed_plugins": {
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.yandex.mobile.appmetrica.plugin.cordova.sample"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.yandex.mobile.appmetrica.plugin.cordova.sample"
-        },
-        "yandex-appmetrica-plugin-cordova": {
-            "PACKAGE_NAME": "com.yandex.mobile.appmetrica.plugin.cordova.sample"
-        }
-    },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.yandex.mobile.appmetrica.plugin.cordova.sample"
-        }
+    "yandex-appmetrica-plugin-cordova": {
+      "PACKAGE_NAME": "com.yandex.mobile.appmetrica.plugin.cordova.sample"
     }
+  },
+  "dependent_plugins": {}
 }

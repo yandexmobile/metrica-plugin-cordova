@@ -1,6 +1,6 @@
 /*
  * Version for iOS
- * © 2012–2017 YANDEX
+ * © 2012–2019 YANDEX
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * https://yandex.com/legal/appmetrica_sdk_agreement/
@@ -36,7 +36,35 @@ NS_ASSUME_NONNULL_BEGIN
 
  By default this option is disabled.
  */
-@property (nonatomic, assign) BOOL handleFirstActivationAsUpdateEnabled;
+@property (nonatomic, assign) BOOL handleFirstActivationAsUpdate;
+
+/** Whether activation of AppMetrica should be considered as the start of a session.
+ If this option is disabled session starts at UIApplicationDidBecomeActiveNotification.
+
+ The option is disabled by default. Enable this property if you want events that are reported after activation to join
+ the current session.
+ */
+@property (nonatomic, assign) BOOL handleActivationAsSessionStart;
+
+/** Whether AppMetrica should automatically track session starts and ends.
+ AppMetrica uses UIApplicationDidBecomeActiveNotification and UIApplicationWillResignActiveNotification notifications
+ to track sessions.
+
+ The maximum length of the session is 24 hours. To continue the session after 24 hours, you should manually
+ invoke the resumeSession method.
+
+ The option is enabled by default. If the option is disabled, you should manually control the session
+ using pauseSession and resumeSession methods.
+ */
+@property (nonatomic, assign) BOOL sessionsAutoTracking;
+
+/** A boolean value indicating whether statistics sending to the AppMetrica server is enabled.
+
+ @note Disabling this option also turns off data sending from the reporters that initialized for different apiKey.
+
+ By default, the statistics sending is enabled.
+ */
+@property (nonatomic, assign) BOOL statisticsSending;
 
 /** Enable/disable location reporting to AppMetrica.
  If enabled and location set via setLocation: method - that location would be used.
@@ -45,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  Enabled by default.
  */
-@property (nonatomic, assign) BOOL trackLocationEnabled;
+@property (nonatomic, assign) BOOL locationTracking;
 
 /** Set/get location to AppMetrica
  To enable AppMetrica to use this location trackLocationEnabled should be 'YES'
@@ -67,19 +95,19 @@ NS_ASSUME_NONNULL_BEGIN
  Enabled by default.
  To disable crash tracking, set the parameter value to false.
  */
-@property (nonatomic, assign) BOOL reportCrashesEnabled;
+@property (nonatomic, assign) BOOL crashReporting;
 
 /** Set/get the arbitrary application version for AppMetrica to report.
 
  By default, the application version is set in the app configuration file Info.plist (CFBundleShortVersionString).
  */
-@property (nonatomic, copy, nullable) NSString *customAppVersion;
+@property (nonatomic, copy, nullable) NSString *appVersion;
 
 /** Enable/disable logging.
 
  By default logging is disabled.
  */
-@property (nonatomic, assign) BOOL loggingEnabled;
+@property (nonatomic, assign) BOOL logs;
 
 /** Set/get preload info, which is used for tracking preload installs.
  Additional info could be https://appmetrica.yandex.com

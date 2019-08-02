@@ -5,3 +5,5 @@ platforms/*
 !/plugins/android.json
 !/plugins/fetch.json
 !/plugins/ios.json
+package.json
+package-lock.json

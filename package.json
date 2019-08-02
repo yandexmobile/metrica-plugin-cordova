@@ -1,6 +1,6 @@
 {
   "name": "yandex-appmetrica-plugin-cordova",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Cordova/PhoneGap plugin for AppMetrica analytics tool",
   "cordova": {
     "id": "yandex-appmetrica-plugin-cordova",
@@ -30,7 +30,7 @@
   ],
   "author": "Yandex, LLC",
   "license": "ISC",
-  "homepage": "https://tech.yandex.ru/metrica-mobile-sdk",
+  "homepage": "https://appmetrica.yandex.com/docs",
   "bugs": {
     "url": "https://github.com/yandexmobile/metrica-plugin-cordova/issues"
   },

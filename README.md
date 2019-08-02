@@ -1,7 +1,7 @@
 # AppMetrica Cordova Plugin
 
 ## Documentation
-Common documentation available on [AppMetrica official site][DOCUMENTATION].
+Common documentation available on [AppMetrica official site][DOCUMENTATION]. 
 Documentation for this plugin will be published soon. 
 
 ## Sample project
@@ -27,6 +27,10 @@ advertisement**.
 
 ## Changelog
 
+### Version 1.0.0
+* Updated versions of the AppMetrica SDK (iOS 3.7.1 and Android 3.6.4).
+* Changed API methods.
+
 ### Version 0.4.0
 * Updated iOS version of the AppMetrica SDK (iOS 2.9.8).
 * Changed the SDK to meet the requirements of the Apple App Store Review Team. Update the AppMetrica SDK to avoid any issues during the App Store moderation process.
@@ -48,5 +52,5 @@ License agreement on use of Yandex AppMetrica is available at [EULA site][LICENS
 
 
 [LICENSE]: https://yandex.com/legal/appmetrica_sdk_agreement/ "Yandex AppMetrica agreement"
-[DOCUMENTATION]: https://tech.yandex.com/appmetrica/doc/mobile-sdk-dg/concepts/about-docpage/ "Yandex AppMetrica documentation"
+[DOCUMENTATION]: https://appmetrica.yandex.com/docs/quick-start/concepts/quick-start.html "Yandex AppMetrica documentation"
 [GitHubSAMPLE]: https://github.com/yandexmobile/metrica-plugin-cordova/tree/master/sample "Sample from reository"

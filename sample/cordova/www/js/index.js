@@ -1,6 +1,6 @@
 /*
  * Version for Cordova/PhoneGap
- * © 2017 YANDEX
+ * © 2017-2019 YANDEX
  * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * https://yandex.com/legal/appmetrica_sdk_agreement/
@@ -65,23 +65,8 @@ var actions = {
             timestamp: 1490352342
         });
     },
-    setAppVersionBtn: function () {
-        window.appMetrica.setCustomAppVersion(document.getElementById('appVersionInput').value);
-    },
-    setSessionTimeoutBtn: function () {
-        window.appMetrica.setSessionTimeout(parseInt(document.getElementById('sessionTimeoutInput').value));
-    },
-    setLoggingEnabledBtn: function () {
-        window.appMetrica.setLoggingEnabled();
-    },
-    trackLocationInput: function () {
-        window.appMetrica.setTrackLocationEnabled(document.getElementById('trackLocationInput').checked);
-    },
-    collectInstalledAppsInput: function () {
-        window.appMetrica.setCollectInstalledAppsEnabled(document.getElementById('collectInstalledAppsInput').checked);
-    },
-    reportCrashesInput: function () {
-        window.appMetrica.setReportCrashesEnabled(document.getElementById('reportCrashesInput').checked);
+    locationTracking: function () {
+        window.appMetrica.setLocationTracking(document.getElementById('locationTracking').checked);
     },
     requestLocation: function () {
         var onSuccess = function(position) {
@@ -104,7 +89,7 @@ var actions = {
         }
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
-}
+};
 
 function forEach (arr, foo) {
     // Workaround for old browsers.

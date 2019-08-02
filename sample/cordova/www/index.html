@@ -1,11 +1,12 @@
-<!DOCTYPE html>
 <!--
-  Version for Cordova/PhoneGap
-  © 2017 YANDEX
-  You may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-  https://yandex.com/legal/appmetrica_sdk_agreement/
--->
+  ~ Version for Cordova/PhoneGap
+  ~ © 2017-2019 YANDEX
+  ~ You may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~ https://yandex.com/legal/appmetrica_sdk_agreement/
+  -->
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;" />
@@ -33,29 +34,8 @@
                 <button id="setMoscowBtn">Moscow</button>
             </div>
             <div class="app-line">
-                <label for="appVersionInput">App version:</label>
-                <input type="text" id="appVersionInput" value="1.0.0" />
-                <button id="setAppVersionBtn">Set</button>
-            </div>
-            <div class="app-line">
-                <label for="sessionTimeoutInput">Session timeout(s):</label>
-                <input type="number" id="sessionTimeoutInput" value="10" />
-                <button id="setSessionTimeoutBtn">Set</button>
-            </div>
-            <div class="app-line">
-                <button id="setLoggingEnabledBtn">Enable logging</button>
-            </div>
-            <div class="app-line">
-                <label for="reportCrashesInput">Report crashes:</label>
-                <input type="checkbox" id="reportCrashesInput" checked />
-            </div>
-            <div class="app-line">
-                <label for="trackLocationInput">Track location:</label>
-                <input type="checkbox" id="trackLocationInput" checked />
-            </div>
-            <div class="app-line">
-                <label for="collectInstalledAppsInput">Collect installed apps:</label>
-                <input type="checkbox" id="collectInstalledAppsInput" />
+                <label for="locationTracking">Track location:</label>
+                <input type="checkbox" id="locationTracking" checked />
             </div>
             <div class="app-line">
                 <button id="requestLocation">Request Location</button>

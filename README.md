@@ -1,6 +1,6 @@
-# [DEPRECATED] AppMetrica Cordova Plugin
+# [ATTENTION] AppMetrica Cordova Plugin
 
-> **[DEPRECATED]** Support and development of the plugin has been stopped. We do not guarantee the SDK will work correctly.
+> Support and development of the plugin has been stopped. We do not guarantee the SDK will work correctly.
 
 ## Documentation
 Common documentation available on [AppMetrica official site][DOCUMENTATION]. 
